@@ -5,14 +5,16 @@
 var http = require("http");
 var path = require("path");
 
-// Express framework
+// Express framework / socketIO module
 
 var express = require("express");
+var socketIO = require("socket.io");
 
 // create an app and server
 
 var app = express();
 var server = http.createServer(app);
+var io = socketIO(server);
 
 // root path /
 
