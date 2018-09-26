@@ -22,6 +22,14 @@ app.get("/", function(req, res) {
     res.send("<h1>Real Time Chat - Backend</h1>")
 })
 
+// Listen on someone entering the socket 
+
+io.on("connection", handleConnection);
+
+function handleConnection(socket) {
+    console.log(socket.id);
+}
+
 // listen on port 5220
 
 server.listen(5220, function() {
