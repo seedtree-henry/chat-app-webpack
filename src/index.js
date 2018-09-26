@@ -1,3 +1,5 @@
+require("./styles.css");
+
 var openSocket = require("socket.io-client");
 var socket = openSocket("http://localhost:5220");
 
@@ -11,10 +13,26 @@ function submitMessage(event) {
     event.preventDefault();
     var message = messageInputTag.value;
     socket.emit("newMessage", message);
+
+    // add my message (li element)
+    var messageTag = document.createElement("li");
+    messageTag.innerHTML = message;
+    messageTag.classList.add("message-mine");
+    messagesUlTag.appendChild(messageTag);
+
+    messageInputTag.value = "";
 }
 
 socket.on("passMessage", getMessage);
 
 function getMessage(data) {
-    console.log(data);
+    // add a message from others (li element)
+    var messageTag = document.createElement("li");
+    var message = data;
+
+    messageTag.innerHTML = message;
+    messageTag.classList.add("message-others");
+    messagesUlTag.appendChild(messageTag);
+
+    messageInputTag.value = "";
 }

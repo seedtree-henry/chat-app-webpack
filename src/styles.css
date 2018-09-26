@@ -1,0 +1,13 @@
+.message-mine {
+    background-color: #4caf50;
+    color: white;
+}
+
+.message-others {
+    background-color: #a5d6a7;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
