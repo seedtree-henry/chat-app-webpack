@@ -28,6 +28,10 @@ io.on("connection", handleConnection);
 
 function handleConnection(socket) {
     console.log(socket.id);
+
+    socket.on("newMessage", function(data) {
+        socket.broadcast.emit("passMessage", data);
+    })
 }
 
 // listen on port 5220

@@ -10,5 +10,11 @@ messageFormTag.addEventListener("submit", submitMessage);
 function submitMessage(event) {
     event.preventDefault();
     var message = messageInputTag.value;
-    console.log(message);
+    socket.emit("newMessage", message);
+}
+
+socket.on("passMessage", getMessage);
+
+function getMessage(data) {
+    console.log(data);
 }
