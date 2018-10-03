@@ -7,6 +7,7 @@ var messagesUlTag = document.querySelector(".messagesList");
 var messageFormTag = document.querySelector(".newMessageForm");
 var messageInputTag = messageFormTag.querySelector("input");
 
+
 messageFormTag.addEventListener("submit", submitMessage);
 
 function submitMessage(event) {
