@@ -14,6 +14,18 @@ var emailInputTag = emailFormTag.querySelector("input");
 var messageFormTag = document.querySelector(".newMessageForm");
 var messageInputTag = messageFormTag.querySelector("input");
 
+// get email from local storage
+
+var StorageEmail = localStorage.getItem("email");
+
+if (StorageEmail) {
+    // show message form only => hide email section
+    emailDivTag.style.display = "none";
+} else {
+    // show email form => hide message section
+    messageDivTag.style.display = "none";
+}
+
 messageFormTag.addEventListener("submit", submitMessage);
 
 function submitMessage(event) {
