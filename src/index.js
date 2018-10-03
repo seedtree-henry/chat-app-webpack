@@ -16,9 +16,9 @@ var messageInputTag = messageFormTag.querySelector("input");
 
 // get email from local storage
 
-var StorageEmail = localStorage.getItem("email");
+var storageEmail = localStorage.getItem("email");
 
-if (StorageEmail) {
+if (storageEmail) {
     // show message form only => hide email section
     emailDivTag.style.display = "none";
 } else {
@@ -26,7 +26,17 @@ if (StorageEmail) {
     messageDivTag.style.display = "none";
 }
 
+emailFormTag.addEventListener("submit", submitEmail);
 messageFormTag.addEventListener("submit", submitMessage);
+
+function submitEmail(event) {
+    event.preventDefault();
+    var email = emailInputTag.value;
+    localStorage.setItem("email", email);
+
+    messageDivTag.style.display = "block";
+    emailDivTag.style.display = "none";
+}
 
 function submitMessage(event) {
     event.preventDefault();
