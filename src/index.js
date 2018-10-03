@@ -43,7 +43,13 @@ function submitEmail(event) {
 function submitMessage(event) {
     event.preventDefault();
     var message = messageInputTag.value;
-    socket.emit("newMessage", message);
+
+    var data = {
+        email: storageEmail,
+        message: message
+    };
+
+    socket.emit("newMessage", data);
 
     // add my message (li element)
     var messageTag = document.createElement("li");

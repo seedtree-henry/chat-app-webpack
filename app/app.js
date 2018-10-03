@@ -30,6 +30,7 @@ function handleConnection(socket) {
     console.log(socket.id);
 
     socket.on("newMessage", function(data) {
+        // console.log(data);
         socket.broadcast.emit("passMessage", data);
     })
 }
