@@ -34,6 +34,8 @@ function submitEmail(event) {
     var email = emailInputTag.value;
     localStorage.setItem("email", email);
 
+    storageEmail = email;
+
     messageDivTag.style.display = "block";
     emailDivTag.style.display = "none";
 }
