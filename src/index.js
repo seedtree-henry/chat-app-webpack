@@ -64,10 +64,12 @@ socket.on("passMessage", getMessage);
 
 function getMessage(data) {
     // add a message from others (li element)
+    console.log(data);
     var messageTag = document.createElement("li");
-    var message = data;
+    var email = data.email;
+    var message = data.message;
 
-    messageTag.innerHTML = message;
+    messageTag.innerHTML = `${email}: ${message}`;
     messageTag.classList.add("message-others");
     messagesUlTag.appendChild(messageTag);
 
