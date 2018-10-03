@@ -3,10 +3,16 @@ require("./styles.css");
 var openSocket = require("socket.io-client");
 var socket = openSocket("http://localhost:5220");
 
+var emailDivTag = document.querySelector(".emailSection");
+var messageDivTag = document.querySelector(".messageSection");
+
 var messagesUlTag = document.querySelector(".messagesList");
+
+var emailFormTag = document.querySelector(".newEmailForm");
+var emailInputTag = emailFormTag.querySelector("input");
+
 var messageFormTag = document.querySelector(".newMessageForm");
 var messageInputTag = messageFormTag.querySelector("input");
-
 
 messageFormTag.addEventListener("submit", submitMessage);
 
