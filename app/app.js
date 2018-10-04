@@ -10,6 +10,32 @@ var path = require("path");
 var express = require("express");
 var socketIO = require("socket.io");
 
+// mongoDB : https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
+
+var mongoose = require('mongoose');
+
+var mongoDB = 'mongodb://henry:abc1234@ds121183.mlab.com:21183/chatapp-03-10';
+mongoose.connect(mongoDB);
+
+var db = mongoose.connection;
+
+db.on("error", function() {
+    console.log('MongoDB connection error');
+})
+
+// schema : shape of model, not a table
+
+var Schema = mongoose.Schema;
+
+var MessageSchema = new Schema({
+    email: String,
+    message: String
+});
+
+// Compile model from schema (a table)
+
+var Message = mongoose.model("Message", MessageSchema);
+
 // create an app and server
 
 var app = express();
@@ -31,6 +57,11 @@ function handleConnection(socket) {
 
     socket.on("newMessage", function(data) {
         // console.log(data);
+        Message.create({
+            email: data.email,
+            message: data.message
+        })
+
         socket.broadcast.emit("passMessage", data);
     })
 }
