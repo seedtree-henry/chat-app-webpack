@@ -21,6 +21,7 @@ var storageEmail = localStorage.getItem("email");
 if (storageEmail) {
     // show message form only => hide email section
     emailDivTag.style.display = "none";
+    getPastMessages();
 } else {
     // show email form => hide message section
     messageDivTag.style.display = "none";
@@ -35,6 +36,8 @@ function submitEmail(event) {
     localStorage.setItem("email", email);
 
     storageEmail = email;
+    
+    getPastMessages();
 
     messageDivTag.style.display = "block";
     emailDivTag.style.display = "none";
@@ -74,4 +77,27 @@ function getMessage(data) {
     messagesUlTag.appendChild(messageTag);
 
     messageInputTag.value = "";
+}
+
+function getPastMessages() {
+    fetch("http://localhost:5220/messages")
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(messages) {
+            for(var i = 0; i < messages.length; i++) {
+                var messageTag = document.createElement("li");
+                var email = messages[i].email;
+                var message = messages[i].message;
+
+                messageTag.innerHTML = `${email}: ${message}`;
+                if (storageEmail == email) {
+                    messageTag.classList.add("message-mine");
+                } else {
+                    messageTag.classList.add("message-others");
+                }
+                
+                messagesUlTag.appendChild(messageTag);
+            }
+        })
 }

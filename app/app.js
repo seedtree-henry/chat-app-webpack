@@ -42,11 +42,39 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
+// cors
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+app.use(allowCrossDomain);
+
+
 // root path /
 
 app.get("/", function(req, res) {
     res.send("<h1>Real Time Chat - Backend</h1>")
 })
+
+// '/messages' page : json format  
+    // localhost:5220/messages
+
+app.get("/messages", messagesInJSON);
+
+function messagesInJSON(req, res) {
+    Message.find({}, function (err, messages) {
+        if (err) {
+            res.json(error);
+        } else {
+            res.json(messages);
+        }
+    })
+}
+
 
 // Listen on someone entering the socket 
 
